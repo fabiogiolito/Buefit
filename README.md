@@ -6,10 +6,10 @@ Todos os dados do site estão na pasta **`data/`**:
 
 | Ficheiro | O que contém | Com que frequência muda |
 |---|---|---|
-| `data/semanas.js` | As marmitas do menu de cada semana | **Toda a semana** |
+| `data/semanas.js` | As marmitas, sopas e sumos do menu de cada semana | **Toda a semana** |
 | `data/precos.js` | Preços e pacotes de tudo | Raramente |
 | `data/ingredientes.js` | Ingredientes das marmitas personalizadas | Às vezes |
-| `data/outros.js` | Sobremesas, sopas e sumos | Às vezes |
+| `data/sobremesas.js` | Sobremesas | Às vezes |
 | `data/pokes.js` | Tipos, bases e ingredientes dos pokes | Às vezes |
 | `data/zonas.js` | Zonas de entrega e taxas | Raramente |
 | `data/mensagens.js` | Número de WhatsApp e mensagem do pedido | Raramente |
@@ -57,31 +57,40 @@ Cada menu tem uma chave no formato `'ANO-SEMANA'` (ex.: `'2026-35'` = semana 35 
 
 ### Passo 2 — Copia um bloco existente
 
-Seleciona um bloco completo de uma semana anterior — desde a linha `'2026-34': [` até à linha `],` (inclusive) — copia-o e cola-o **por baixo do último bloco**, mas ainda **antes da última linha `};`** do ficheiro.
+Seleciona um bloco completo de uma semana anterior — desde a linha `'2026-34': {` até à linha `},` (inclusive) — copia-o e cola-o **por baixo do último bloco**, mas ainda **antes da última linha `};`** do ficheiro.
 
 ### Passo 3 — Atualiza o bloco novo
 
-1. Muda o número da semana na primeira linha (ex.: `'2026-35': [`).
-2. Substitui as marmitas pelas novas — uma por linha, cada uma entre plicas e a terminar com vírgula. Normalmente são 10, mas o número pode variar (8, 12, …) — o site ajusta-se automaticamente ao tamanho da lista.
+1. Muda o número da semana na primeira linha (ex.: `'2026-35': {`).
+2. Em `marmitas`, substitui as marmitas pelas novas — uma por linha, cada uma entre plicas e a terminar com vírgula. Normalmente são 10, mas o número pode variar (8, 12, …) — o site ajusta-se automaticamente ao tamanho da lista.
+3. Em `sopas`, põe as sopas da semana, uma por linha no formato `[ 'Nome', 0.0 ],` (o `0.0` é o extra que soma ao preço base de sopa em `precos.js` — normalmente fica `0.0`).
+4. Em `sumos`, o mesmo formato das sopas. Se ainda não houver sumos nessa semana, deixa a lista vazia: `sumos: [],` — a secção simplesmente não aparece no site.
 
 O resultado deve ficar assim:
 
 ```js
-  '2026-35': [
-    'Arroz branco, Feijão preto, Bife grelhado',
-    'Puré de batata, Brócolis, Frango assado',
-    'Esparguete à bolonhesa',
-    'Arroz integral, Legumes salteados, Salmão grelhado',
-    'Cuscuz vegetariano, Beterraba, Tofu grelhado',
-    'Batata doce assada, Couve, Peru grelhado',
-    'Penne ao molho de tomate com atum',
-    'Arroz de cenoura, Feijão verde, Bifanas',
-    'Quinoa, Cogumelos, Frango desfiado',
-    'Salada de grão de bico, Ovos cozidos',
-  ],
+  '2026-35': {
+    marmitas: [
+      'Arroz branco, Feijão preto, Bife grelhado',
+      'Puré de batata, Brócolis, Frango assado',
+      'Esparguete à bolonhesa',
+      'Arroz integral, Legumes salteados, Salmão grelhado',
+      'Cuscuz vegetariano, Beterraba, Tofu grelhado',
+      'Batata doce assada, Couve, Peru grelhado',
+      'Penne ao molho de tomate com atum',
+      'Arroz de cenoura, Feijão verde, Bifanas',
+      'Quinoa, Cogumelos, Frango desfiado',
+      'Salada de grão de bico, Ovos cozidos',
+    ],
+    sopas: [
+      [ 'Sopa de Abóbora',       0.0 ],
+      [ 'Sopa de Alho Francês',  0.0 ],
+    ],
+    sumos: [],
+  },
 ```
 
-A **ordem das marmitas importa**: a posição na lista é o número da marmita no pedido (a 1.ª linha é a marmita 1, e assim por diante), por isso escreve-as pela ordem oficial do menu.
+A **ordem importa** nas três listas: a posição é o número do item no pedido (a 1.ª marmita é a marmita 1, a 1.ª sopa é a sopa 1, e assim por diante), por isso escreve-as pela ordem oficial do menu.
 
 O site mostra sozinho a semana atual (ou a mais recente que existir) — não é preciso apagar nem "ativar" nada.
 
@@ -89,8 +98,9 @@ O site mostra sozinho a semana atual (ou a mais recente que existir) — não é
 
 - [ ] O número da semana está certo e não repete um já existente
 - [ ] Estão lá todas as marmitas do menu, pela ordem oficial
-- [ ] Cada linha começa com `'`, acaba com `',` e não tem apóstrofos no meio
-- [ ] O bloco termina com `],` e a última linha do ficheiro continua a ser `};`
+- [ ] As sopas da semana estão em `sopas` (e os sumos em `sumos`, ou `sumos: [],` se não houver)
+- [ ] Cada linha acaba com `,` e não tem apóstrofos no meio dos nomes
+- [ ] O bloco termina com `},` e a última linha do ficheiro continua a ser `};`
 - [ ] Não apagaste nenhuma semana antiga
 
 ---
@@ -143,11 +153,13 @@ Há três listas: `BASES` (arrozes, purés, massas…), `SIDES` (acompanhamentos
 
 ---
 
-## 🍨 Sobremesas, sopas e sumos
+## 🍨 Sobremesas
 
-**Ficheiro:** `data/outros.js`
+**Ficheiro:** `data/sobremesas.js`
 
-Três listas simples: `DESSERTS`, `SOUPS` e `JUICES`. Cada linha é `[ 'Nome', extra ],`:
+(As sopas e os sumos mudam toda a semana e estão em `semanas.js` — ver a secção do menu da semana.)
+
+Uma lista simples, `DESSERTS`. Cada linha é `[ 'Nome', extra ],`:
 
 ```js
   [ 'Mousse de Manga',   0.0 ],

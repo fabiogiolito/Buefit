@@ -1,7 +1,7 @@
 /* ============================================================
    BUÉ FIT! — FUNÇÕES (semana ativa, preços, código de pedido)
    Normalmente não precisas de mexer aqui: os dados editáveis
-   estão em ingredientes.js, semanas.js, pokes.js, outros.js,
+   estão em ingredientes.js, semanas.js, pokes.js, sobremesas.js,
    zonas.js e precos.js. Carregar sempre depois desses ficheiros.
 ============================================================ */
 
@@ -20,10 +20,10 @@ function weekKeyOf(date){
   const [y, w] = isoWeekOf(date);
   return y + '-' + String(w).padStart(2, '0');
 }
-/* Semana ativa: a atual se existir, senão a mais recente publicada */
-const ACTIVE_WEEK_KEY = WEEKS[weekKeyOf(new Date())]
-  ? weekKeyOf(new Date())
-  : Object.keys(WEEKS).sort().pop();
+/* Semana ativa: sempre a mais recente publicada em semanas.js.
+   As anteriores ficam no ficheiro só para descodificar links antigos.
+   WEEK tem {marmitas, sopas, sumos} — ver o formato em semanas.js. */
+const ACTIVE_WEEK_KEY = Object.keys(WEEKS).sort().pop();
 const WEEK = WEEKS[ACTIVE_WEEK_KEY];
 
 /* ---------- Dietas ---------- */
@@ -131,11 +131,12 @@ function packProgress(items){
    CÓDIGO DE PEDIDO
    Formato: BF-[W<ano><semana>]-<item>-<item>-…-E<zona>-<check>
    W2633: menu da semana 33 de 2026 (presente quando o pedido tem
-          marmitas semanais; diz ao decode que menu usar)
+          marmitas, sopas ou sumos semanais; diz ao decode que menu usar)
    Item:  [qtd]B3A5P12L    marmita própria (códigos do menu + tamanho)
           [qtd]S4M         marmita semanal nº4, tamanho M
           [qtd]K1B2I1.3.5  poke (tipo nº1, base nº2, ingredientes 1,3,5)
-          [qtd]D2 / Z1 / U1   sobremesa / sopa / sumo (nº na lista)
+          [qtd]D2          sobremesa (nº na lista de sobremesas.js)
+          [qtd]Z1 / U1     sopa / sumo (nº na lista da semana em semanas.js)
    Último segmento: carácter de verificação (apanha erros de escrita).
 ============================================================ */
 const CODE_ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -156,7 +157,8 @@ function weekTokenFor(key){ // '2026-33' → 'W2633'
 /* order: [{key, qty}] com as keys usadas no index.html */
 function encodeOrderCode(order, zoneName){
   const segs = [];
-  if (order.some(o => /^week:/.test(o.key))) segs.push(weekTokenFor(ACTIVE_WEEK_KEY));
+  // sopas e sumos também são semanais — o código precisa do token da semana
+  if (order.some(o => /^(week:|SOPA:|SUMO:)/.test(o.key))) segs.push(weekTokenFor(ACTIVE_WEEK_KEY));
   for (const o of order) {
     let tok = null, m;
     if ((m = o.key.match(/^marmita:(B\d+)\+(A\d+)\+(P\d+):(M|L)$/))) {
@@ -175,10 +177,10 @@ function encodeOrderCode(order, zoneName){
       const i = DESSERTS.findIndex(d => d[0] === o.key.slice(5));
       if (i >= 0) tok = 'D' + (i + 1);
     } else if (o.key.startsWith('SOPA:')) {
-      const i = SOUPS.findIndex(s => s[0] === o.key.slice(5));
+      const i = WEEK.sopas.findIndex(s => s[0] === o.key.slice(5));
       if (i >= 0) tok = 'Z' + (i + 1);
     } else if (o.key.startsWith('SUMO:')) {
-      const i = JUICES.findIndex(j => j[0] === o.key.slice(5));
+      const i = WEEK.sumos.findIndex(j => j[0] === o.key.slice(5));
       if (i >= 0) tok = 'U' + (i + 1);
     }
     if (!tok) return null; // item não codificável → sem código, usa-se o texto completo
@@ -219,7 +221,7 @@ function decodeOrderCode(input){
     if (WEEKS[key]) weekKey = key;
     else errors.push(`Menu da semana ${key} não encontrado — adiciona-o em semanas.js.`);
   }
-  const weekMenu = WEEKS[weekKey] || [];
+  const weekMenu = WEEKS[weekKey] || { marmitas: [], sopas: [], sumos: [] };
 
   for (const seg of segs) {
     const parts = seg.match(/^(\d*)([A-Z].*)$/);
@@ -240,7 +242,7 @@ function decodeOrderCode(input){
     } else if (tok === wSeg) {
       continue; // segmento da semana, já tratado acima
     } else if ((m = tok.match(/^S(\d+)(M|L)$/))) {
-      const w = weekMenu[+m[1] - 1];
+      const w = weekMenu.marmitas[+m[1] - 1];
       if (!w) { errors.push(`Marmita semanal nº${m[1]} não existe no menu da semana ${weekKey}`); continue; }
       items.push({ qty, kind: 'semanal', tag: m[2], title: `Marmita ${m[1]} (semana ${weekKey})`, desc: w, price: PRECOS.semanal[m[2]][1], extra: 0 });
     } else if ((m = tok.match(/^K(\d+)B(\d+)(?:I([\d.]+))?$/))) {
@@ -257,11 +259,11 @@ function decodeOrderCode(input){
     } else if ((m = tok.match(/^D(\d+)$/)) && DESSERTS[+m[1] - 1]) {
       const [name, extra] = DESSERTS[+m[1] - 1];
       items.push({ qty, kind: 'sobremesa', tag: 'DOCE', title: name, desc: '', price: PRECOS.sobremesa[1] + extra, extra });
-    } else if ((m = tok.match(/^Z(\d+)$/)) && SOUPS[+m[1] - 1]) {
-      const [name, extra] = SOUPS[+m[1] - 1];
+    } else if ((m = tok.match(/^Z(\d+)$/)) && weekMenu.sopas[+m[1] - 1]) {
+      const [name, extra] = weekMenu.sopas[+m[1] - 1];
       items.push({ qty, kind: 'sopa', tag: 'SOPA', title: name, desc: '', price: PRECOS.sopa[1] + extra, extra });
-    } else if ((m = tok.match(/^U(\d+)$/)) && JUICES[+m[1] - 1]) {
-      const [name, extra] = JUICES[+m[1] - 1];
+    } else if ((m = tok.match(/^U(\d+)$/)) && weekMenu.sumos[+m[1] - 1]) {
+      const [name, extra] = weekMenu.sumos[+m[1] - 1];
       items.push({ qty, kind: 'sumo', tag: 'SUMO', title: name, desc: '', price: PRECOS.sumo[1] + extra, extra });
     } else if ((m = tok.match(/^E(\d+)$/)) && ZONES[+m[1] - 1]) {
       zone = ZONES[+m[1] - 1];

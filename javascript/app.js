@@ -5,7 +5,7 @@
    Os dados estão em /data e a lógica partilhada em funcoes.js.
 ============================================================ */
 /* ============================================================
-   DATA — ingredientes.js, semanas.js, pokes.js, outros.js, funcoes.js
+   DATA — ingredientes.js, semanas.js, pokes.js, sobremesas.js, funcoes.js
 ============================================================ */
 /* grupos do wizard: derivados da coluna 'Grupo' de ingredientes.js,
    pela ordem em que aparecem na lista (null = lista sem grupos) */
@@ -1032,7 +1032,7 @@ $('#randomBtn').addEventListener('click', () => {
 const weekGrid = $('#weekGrid');
 $('#weekLegend').innerHTML =
   `<span><b>M</b>300g: ${eur(PRECOS.semanal.M[1])}</span><span class="sep">·</span><span><b>L</b>400g: ${eur(PRECOS.semanal.L[1])}</span>`;
-WEEK.forEach((desc, i) => {
+WEEK.marmitas.forEach((desc, i) => {
   const row = el('div', 'week-row');
   row.innerHTML = `
     <span class="week-num">${String(i + 1).padStart(2, '0')}</span>
@@ -1057,6 +1057,16 @@ WEEK.forEach((desc, i) => {
   });
   weekGrid.appendChild(row);
 });
+
+/* sopas e sumos da semana (secções escondidas quando a lista está vazia) */
+if (WEEK.sopas.length) {
+  $('#weekSoups').hidden = false;
+  renderExtras('#weekSoupGrid', WEEK.sopas, 'SOPA', 'sopa', '🥣');
+}
+if (WEEK.sumos.length) {
+  $('#weekJuices').hidden = false;
+  renderExtras('#weekJuiceGrid', WEEK.sumos, 'SUMO', 'sumo', '🥤');
+}
 
 /* ============================================================
    POKE
@@ -1160,8 +1170,6 @@ function renderExtras(gridId, items, tag, kind, emoji){
   });
 }
 renderExtras('#dessertGrid', DESSERTS, 'DOCE', 'sobremesa', '🍮');
-renderExtras('#soupGrid', SOUPS, 'SOPA', 'sopa', '🥣');
-renderExtras('#juiceGrid', JUICES, 'SUMO', 'sumo', '🥤');
 
 /* ============================================================
    WIZARD HEIGHT — fill the viewport exactly, no body scroll

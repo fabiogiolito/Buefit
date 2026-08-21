@@ -84,7 +84,10 @@ const PRECOS = {
 
 };
 
-/* Pokes */
+/* Pokes 
+   Os ingredientes e outros detalhes dos pokes
+   você encontra no arquivo pokes.js
+*/
 const POKE_INCLUDED_INGS = 5; // Quantos ingredientes incluidos no preço base
 const POKE_EXTRA_ING = 1.5;   // Custo por cada ingrediente extra
 

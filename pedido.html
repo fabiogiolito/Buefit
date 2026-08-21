@@ -6,7 +6,7 @@
 <title>Bué FIT! — O teu pedido</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/app.css">
+<script>document.write(`<link rel="stylesheet" href="styles/app.css?t=${Date.now()}">`);</script>
 </head>
 <body class="page-pedido">
 <div class="wrap">
@@ -23,13 +23,14 @@
   <div id="result"></div>
 </div>
 
-<script src="data/ingredientes.js"></script>
-<script src="data/semanas.js"></script>
-<script src="data/pokes.js"></script>
-<script src="data/outros.js"></script>
-<script src="data/zonas.js"></script>
-<script src="data/precos.js"></script>
-<script src="javascript/funcoes.js"></script>
+<script>
+/* anti-cache: carrega dados e scripts com um parâmetro único por visita,
+   para o browser/CDN nunca usar versões antigas (menus desatualizados). */
+[
+  'data/ingredientes.js', 'data/semanas.js', 'data/pokes.js', 'data/sobremesas.js',
+  'data/zonas.js', 'data/precos.js', 'javascript/funcoes.js',
+].forEach(f => document.write(`<script src="${f}?t=${Date.now()}"><\/script>`));
+</script>
 <script>
 const $ = s => document.querySelector(s);
 const eur = n => n.toFixed(2).replace('.', ',') + ' €';
