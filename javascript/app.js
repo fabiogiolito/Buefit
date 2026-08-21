@@ -466,13 +466,11 @@ const marmita = (() => {
   sEl('use', {href:'#mRim', transform:'scale(0.82)', fill:'#A97C43', opacity:'.35'}, shadeBase);
   sEl('use', {href:'#mRim', fill:'#E7C08B'}, svg.querySelector('#mRimTop'));
 
-  // "Bué FIT!" impresso na parede frontal
+  // wordmark impresso na parede frontal
   {
     const tg = sEl('g', {transform:'matrix(0.866,-0.5,0,1,72,102)'}, svg.querySelector('#mWallText'));
-    const t = sEl('text', {'text-anchor':'middle',
-      'font-family':"'Baloo 2', sans-serif", 'font-weight':'700', 'font-size':'36',
-      fill:'#7A5426', opacity:'.85'}, tg);
-    t.textContent = 'Bué FIT!';
+    sEl('image', {href:'images/wordmark.png', x:-50, y:-32, width:100, height:52,
+      preserveAspectRatio:'xMidYMid meet', opacity:'.85'}, tg);
   }
 
   // recorte da abertura (tudo o que está dentro fica atrás do rebordo)
@@ -799,6 +797,8 @@ marmita.onSlotClick(slot => {
   if (!pool.length) return;
   pick(slot, pool[Math.floor(Math.random() * pool.length)], { advance: false });
   if (wizStep === 'summary') renderSummary(); // reflete a troca no resumo
+  // marmita completa ao clicar nos compartimentos → salta para o resumo
+  else if (STEP_ORDER.every(s => sel[s])) setTimeout(() => setStep('summary'), 380);
 });
 
 function clearSlot(slot){

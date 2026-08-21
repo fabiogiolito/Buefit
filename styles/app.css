@@ -46,16 +46,14 @@ body.page-app{
   margin-right:var(--panel-w);
 }
 .page-app .logo-mark{
-  width:64px;height:64px;flex-shrink:0;border-radius:50%;
-  border:1px solid var(--line);
-  overflow:hidden;background:var(--paper);
+  width:64px;height:64px;flex-shrink:0;
   transition:transform .5s var(--ease-out);
 }
 .page-app .logo-mark:hover{transform:scale(1.05)}
-.page-app .logo-mark img{width:118%;height:118%;object-fit:cover;margin:-9%}
-.page-app .wordmark{font-family:'Baloo 2';font-weight:700;font-size:clamp(28px,4vw,38px);line-height:.9;color:var(--olive);letter-spacing:-.5px;width:fit-content}
-.page-app .wordmark em{font-style:normal;font-size:.62em;display:inline-block;transform:translateY(.18em)}
-.tagline{font-size:12px;letter-spacing:.05em;color:var(--olive-soft);margin-top:6px;line-height:1.5;text-wrap:pretty}
+.page-app .logo-mark img{width:100%;height:100%;object-fit:contain;display:block}
+.page-app .wordmark{width:fit-content}
+.page-app .wordmark img{height:clamp(38px,5vw,48px);width:auto;display:block}
+.tagline{font-size:12px;letter-spacing:.05em;color:var(--olive-soft);line-height:1.5;text-wrap:pretty}
 .tag-br{display:none}
 
 /* ---------- Nav ---------- */
@@ -734,22 +732,18 @@ aside#panel{
 #intro.done{opacity:0;pointer-events:none}
 .intro-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
 .intro-logo{
-  width:120px;height:120px;border-radius:50%;overflow:hidden;
-  background:var(--paper);border:1px solid var(--line);
+  width:120px;height:120px;
   opacity:0;animation:introLogo .6s var(--ease-out) forwards;
   will-change:transform;
 }
-.intro-logo img{width:118%;height:118%;object-fit:cover;margin:-9%}
+.intro-logo img{width:100%;height:100%;object-fit:contain;display:block}
 @keyframes introLogo{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
-.intro-word{
-  font-family:'Baloo 2';font-weight:700;font-size:64px;color:var(--olive);
-  letter-spacing:-.5px;line-height:.9;will-change:transform;
+.intro-word{will-change:transform}
+.intro-word img{
+  height:100px;width:auto;display:block;
+  opacity:0;animation:introWord .55s var(--ease-out) .4s forwards;
 }
-.intro-word .ih{display:inline-block}
-.intro-word .ih-1{opacity:0;animation:introHalf1 .55s var(--ease-out) .4s forwards}
-.intro-word .ih-2{font-size:.62em;opacity:0;animation:introHalf2 .55s var(--ease-out) .55s forwards}
-@keyframes introHalf1{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
-@keyframes introHalf2{from{opacity:0;transform:translateY(.18em) translateX(30px)}to{opacity:1;transform:translateY(.18em)}}
+@keyframes introWord{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 
 body.page-app.preload{overflow:hidden}
 #intro{overflow:hidden}
@@ -778,13 +772,9 @@ body.page-pedido{
 .page-pedido .ped-title{text-align:right}
 .page-pedido .ped-head h1{margin-bottom:0;line-height:1.2}
 .page-pedido .ped-head .sub{margin-bottom:0}
-.page-pedido .logo-mark{
-  width:48px;height:48px;flex-shrink:0;border-radius:50%;
-  border:1px solid var(--line);overflow:hidden;background:var(--paper);
-}
-.page-pedido .logo-mark img{width:118%;height:118%;object-fit:cover;margin:-9%}
-.page-pedido .wordmark{font-family:'Baloo 2';font-weight:700;font-size:24px;color:var(--olive);line-height:1}
-.page-pedido .wordmark em{font-style:normal;font-size:.62em;display:inline-block;transform:translateY(.18em)}
+.page-pedido .logo-mark{width:48px;height:48px;flex-shrink:0}
+.page-pedido .logo-mark img{width:100%;height:100%;object-fit:contain;display:block}
+.page-pedido .wordmark img{height:34px;width:auto;display:block}
 .page-pedido h1{font-family:'Baloo 2';font-size:26px;color:var(--olive-deep);margin-bottom:4px}
 .page-pedido .sub{font-size:13px;color:var(--olive-soft);margin-bottom:22px}
 .page-pedido .alert{border-radius:8px;padding:12px 16px;font-size:13px;font-weight:700;margin-bottom:14px;
@@ -825,13 +815,9 @@ body.page-proposta{
 }
 .page-proposta .page{max-width:820px;margin:0 auto;padding:48px clamp(20px,5vw,48px) 96px}
 .page-proposta header{display:flex;align-items:center;gap:16px;margin-bottom:8px}
-.page-proposta .logo-mark{
-  width:56px;height:56px;flex-shrink:0;border-radius:50%;
-  border:1px solid var(--line);overflow:hidden;background:var(--paper);
-}
-.page-proposta .logo-mark img{width:118%;height:118%;object-fit:cover;margin:-9%}
-.page-proposta .wordmark{font-family:'Baloo 2';font-weight:700;font-size:28px;color:var(--olive);line-height:1}
-.page-proposta .wordmark em{font-style:normal;font-size:.62em;display:inline-block;transform:translateY(.18em)}
+.page-proposta .logo-mark{width:56px;height:56px;flex-shrink:0}
+.page-proposta .logo-mark img{width:100%;height:100%;object-fit:contain;display:block}
+.page-proposta .wordmark img{height:40px;width:auto;display:block}
 .page-proposta .doc-tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-soft);margin-top:4px}
 .page-proposta h1{font-family:'Baloo 2';font-weight:700;font-size:clamp(28px,5vw,38px);line-height:1.15;margin:40px 0 12px}
 .page-proposta .lead{font-size:15px;color:var(--muted);max-width:60ch}
