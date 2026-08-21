@@ -342,7 +342,7 @@ function updateTotals(){
   const n = order.reduce((s, o) => s + o.qty, 0);
   $('#countBadge').textContent = n;
   $('#mobileCount').textContent = n;
-  $('#waBtn').disabled = !order.length || !zone;
+  $('#waBtn').disabled = !order.length;
 }
 const ZONE_KEY = 'buefit-zone';
 /* closed select reads "Entrega em {zona}"; the open list keeps the full labels */
@@ -406,7 +406,18 @@ function buildMessage(){
 }
 $('#waNum').textContent = WHATSAPP_NUMERO; // número vem de data/mensagens.js
 const waDigits = WHATSAPP_NUMERO.replace(/\D/g, ''); // só dígitos, para o wa.me
+/* sem zona de entrega não há envio nem cópia — avisa e aponta para o seletor */
+function requireZone(){
+  const sel = $('#deliverySel');
+  if (sel.value) return true;
+  toast('Seleciona a zona de entrega');
+  $('#panel').classList.add('open'); // em mobile o painel pode estar fechado
+  sel.classList.remove('attention'); void sel.offsetWidth; sel.classList.add('attention');
+  sel.focus();
+  return false;
+}
 $('#waBtn').addEventListener('click', () => {
+  if (!requireZone()) return;
   window.open(`https://wa.me/${waDigits}?text=` + encodeURIComponent(buildMessage()), '_blank');
 });
 $('#waNum').addEventListener('click', async () => {
@@ -415,6 +426,7 @@ $('#waNum').addEventListener('click', async () => {
 });
 $('#copyBtn').addEventListener('click', async () => {
   if (!order.length) { toast('A encomenda está vazia'); return; }
+  if (!requireZone()) return;
   try { await navigator.clipboard.writeText(buildMessage()); toast('Pedido copiado! Cola no WhatsApp 📋'); }
   catch { toast('Não foi possível copiar'); }
 });

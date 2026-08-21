@@ -622,6 +622,9 @@ aside#panel{
 .delivery-row select:hover{box-shadow:var(--shadow-soft)}
 .delivery-row select:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(90,100,68,.15)}
 .delivery-row select.empty{border-color:#B0A182;color:#6B7058;background-color:var(--cream)}
+/* abanão quando se tenta enviar/copiar sem zona escolhida */
+.delivery-row select.attention{animation:zoneAttention .45s ease;border-color:#A8542F}
+@keyframes zoneAttention{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
 .page-app .totals{display:flex;flex-direction:column;gap:4px;font-size:12px;margin-bottom:14px}
 .page-app .totals .row{display:flex;justify-content:space-between;color:var(--olive-soft)}
 .page-app .totals .confirm-note{font-size:11px;color:var(--olive-soft);margin-top:4px}
