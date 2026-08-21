@@ -1029,6 +1029,22 @@ $('#randomBtn').addEventListener('click', () => {
 /* ============================================================
    WEEK MENU
 ============================================================ */
+/* tabelas da aba Pacotes (menu da semana e personalizadas), geradas de PRECOS */
+document.querySelectorAll('.pack-table').forEach(elTable => {
+  const t = PRECOS[elTable.dataset.kind];
+  const qtys = [...new Set([...Object.keys(t.M), ...Object.keys(t.L)].map(Number))]
+    .filter(q => q > 1).sort((a, b) => a - b);
+  const cell = (size, q) => t[size][q] == null ? '—'
+    : `${eur(t[size][q])} <small>${eur(t[size][q] / q)}/un</small>`;
+  elTable.innerHTML = `<table>
+    <thead><tr><th></th><th>M · 300g</th><th>L · 400g</th></tr></thead>
+    <tbody>
+      <tr><td>1 marmita</td><td>${eur(t.M[1])}</td><td>${eur(t.L[1])}</td></tr>
+      ${qtys.map(q => `<tr><td>${q} marmitas</td><td>${cell('M', q)}</td><td>${cell('L', q)}</td></tr>`).join('')}
+    </tbody>
+  </table>`;
+});
+
 const weekGrid = $('#weekGrid');
 $('#weekLegend').innerHTML =
   `<span><b>M</b>300g: ${eur(PRECOS.semanal.M[1])}</span><span class="sep">·</span><span><b>L</b>400g: ${eur(PRECOS.semanal.L[1])}</span>`;

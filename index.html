@@ -42,6 +42,7 @@
   <button class="nav-btn" data-view="poke">Poke bowls</button>
   <button class="nav-btn" data-view="extras">Sobremesas</button>
   <button class="nav-btn" data-view="build">Monta a tua</button>
+  <button class="nav-btn" data-view="pacotes">Pacotes</button>
 </nav>
 
 <main>
@@ -183,6 +184,23 @@
         <button class="add-box-btn" id="addPokeBtn" disabled>Adicionar à encomenda</button>
       </div>
     </div>
+  </section>
+
+  <!-- ============ PACOTES ============ -->
+  <section class="view" id="view-pacotes">
+    <h2 class="section">Pacotes</h2>
+    <p class="section-sub">Quantas mais marmitas, menor o preço por unidade. O desconto é aplicado automaticamente na encomenda.</p>
+    <div class="pack-grid">
+      <div class="pack-card">
+        <h3>Menu da semana</h3>
+        <div class="pack-table" data-kind="semanal"></div>
+      </div>
+      <div class="pack-card">
+        <h3>Marmitas personalizadas</h3>
+        <div class="pack-table" data-kind="propria"></div>
+      </div>
+    </div>
+    <p class="pack-note">Os pacotes contam marmitas do mesmo grupo e tamanho. Alguns ingredientes têm valor acrecido, essa diferença não é afetada pelo desconto.</p>
   </section>
 
   <!-- ============ EXTRAS ============ -->
