@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bué FIT! — Marmitas por encomenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/app.css">
+</head>
+<body class="page-app preload">
+
+<div id="intro">
+  <div class="intro-inner">
+    <div class="intro-logo"><img src="images/logo.jpg" alt=""></div>
+    <div class="intro-word"><span class="ih ih-1">Bué</span><span class="ih ih-2">FIT!</span></div>
+  </div>
+</div>
+
+<header>
+  <div class="logo-mark"><img src="images/logo.jpg" alt="Bué FIT — chef"></div>
+  <div>
+    <div class="wordmark">Bué<em>FIT!</em></div>
+    <div class="tagline">Marmitas saudáveis · entregues em tua casa</div>
+  </div>
+</header>
+
+<nav id="nav">
+  <button class="nav-btn active" data-view="week">Menu da semana</button>
+  <button class="nav-btn" data-view="poke">Poke bowls</button>
+  <button class="nav-btn" data-view="extras">Sobremesas &amp; Sopas</button>
+  <button class="nav-btn" data-view="build">Monta a tua</button>
+</nav>
+
+<main>
+
+  <!-- ============ BUILDER ============ -->
+  <section class="view" id="view-build">
+    <div class="builder">
+      <div class="stage">
+        <div class="scene-wrap" id="sceneWrap">
+          <div class="scene" id="scene">
+            <svg id="marmitaSvg" viewBox="-250 -140 500 355" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marmita kraft em perspetiva isométrica com três compartimentos">
+              <defs>
+                <rect id="mRim" x="-150" y="-105" width="300" height="210" rx="72" ry="72"/>
+                <rect id="mInner" x="-142" y="-97" width="284" height="194" rx="66" ry="66"/>
+                <linearGradient id="mWallGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#D8A96E"/>
+                  <stop offset=".5" stop-color="#CE9C60"/>
+                  <stop offset="1" stop-color="#BE8A4F"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="0" cy="150" rx="235" ry="52" fill="#3B4229" opacity=".12"/>
+              <g id="mWalls"></g>
+              <g id="mWallText"></g>
+              <g id="mRimTop" transform="matrix(-0.866,0.5,0.866,0.5,0,0)"></g>
+              <g id="mCavity"></g>
+              <g id="mFood"></g>
+              <g id="mHints"></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard">
+        <div class="wizard-head">
+          <button class="wiz-back" id="wizBack" hidden aria-label="voltar">←</button>
+          <div>
+            <div class="wizard-title">Montar marmita</div>
+            <div class="wizard-step" id="wizStepLabel">Passo 1 de 3 · Base</div>
+          </div>
+          <div class="wiz-dots" id="wizDots"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="diet-bar" id="dietBar">
+          <button class="diet-trigger" id="dietTrigger" aria-haspopup="listbox">
+            <span id="dietTriggerLabel">Restrições alimentares</span>
+            <span class="arr">▼</span>
+          </button>
+          <button class="random-btn" id="randomBtn" title="Surpreende-me" aria-label="Surpreende-me">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="4"/>
+              <circle cx="8.2" cy="8.2" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="15.8" cy="8.2" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="8.2" cy="15.8" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="15.8" cy="15.8" r="1.4" fill="currentColor" stroke="none"/>
+            </svg>
+          </button>
+          <div class="diet-menu" id="dietMenu" hidden>
+            <!-- opções geradas a partir de DIETAS (ingredientes.js) -->
+          </div>
+        </div>
+        <div class="wiz-panes" id="wizPanes">
+          <div class="chip-pane active" id="pane-base"></div>
+          <div class="chip-pane" id="pane-side"></div>
+          <div class="chip-pane" id="pane-prot"></div>
+          <div class="chip-pane" id="pane-summary">
+            <div class="recipe">
+              <button class="recipe-clear" id="recipeClear" aria-label="Limpar seleção e recomeçar" title="Limpar seleção e recomeçar">✕</button>
+              <div class="recipe-label">A tua marmita</div>
+              <div class="recipe-code" id="recipeCode"></div>
+              <div class="summary-lines" id="summaryLines"></div>
+              <div class="recipe-row">
+                <div class="size-toggle" id="sizeToggle">
+                  <button data-size="M" class="on">M · 300g</button>
+                  <button data-size="L">L · 400g</button>
+                </div>
+                <div class="recipe-price" id="recipePrice">9,00&nbsp;€</div>
+              </div>
+            </div>
+            <div class="diet-alert" id="dietAlert" hidden></div>
+          </div>
+        </div>
+        <div class="wizard-foot">
+          <button class="continue-btn" id="wizNext" disabled>Continuar</button>
+          <div class="wiz-hint" id="wizHint">Escolhe 1 base + 1 acompanhamento + 1 proteína.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ WEEK ============ -->
+  <section class="view active" id="view-week">
+    <div class="week-head">
+      <p class="week-lead">10 sugestões de marmitas, renovadas todas as semanas.</p>
+      <div class="week-legend" id="weekLegend"></div>
+    </div>
+    <div class="week-list" id="weekGrid"></div>
+  </section>
+
+  <!-- ============ POKE ============ -->
+  <section class="view" id="view-poke">
+    <h2 class="section">Menu Poke</h2>
+    <p class="section-sub">Escolhe o teu poke, 1 base e 5 ingredientes. Ingrediente adicional: +1,50&nbsp;€.</p>
+    <div class="poke-grid">
+      <div>
+        <div class="poke-card">
+          <h3>O teu poke</h3>
+          <div class="radio-row" id="pokeTypes"></div>
+        </div>
+        <div class="poke-card">
+          <h3>Base <span style="opacity:.6">(escolhe 1)</span></h3>
+          <div class="radio-row" id="pokeBases"></div>
+        </div>
+        <div class="poke-card">
+          <h3>Ingredientes <span style="opacity:.6">(5 incluídos)</span></h3>
+          <div class="radio-row" id="pokeIngs"></div>
+          <div class="ing-count" id="ingCount"><b>0</b>/5 ingredientes escolhidos</div>
+        </div>
+      </div>
+      <div class="poke-summary" id="pokeSummary">
+        <div class="bowl">
+          <div class="bowl-food" id="bowlFood"></div>
+          <div class="bowl-dish"></div>
+        </div>
+        <div class="recipe-code" id="pokeTitle">Poke de Salmão</div>
+        <div class="recipe-desc" id="pokeDesc">Escolhe a base e os ingredientes…</div>
+        <div class="recipe-row">
+          <span style="font-size:11px;text-transform:uppercase;opacity:.7">Total do poke</span>
+          <div class="recipe-price" id="pokePrice">14,00&nbsp;€</div>
+        </div>
+        <button class="add-box-btn" id="addPokeBtn" disabled>Adicionar à encomenda</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXTRAS ============ -->
+  <section class="view" id="view-extras">
+    <h2 class="section">Sobremesas, Sopas &amp; Sumos</h2>
+    <p class="section-sub">O toque final da tua encomenda.</p>
+    <div class="extras-h">Sobremesas</div>
+    <div class="extras-cols" id="dessertGrid"></div>
+    <div class="extras-h">Sopas</div>
+    <div class="extras-cols" id="soupGrid"></div>
+    <div class="extras-h">Sumos</div>
+    <div class="extras-cols" id="juiceGrid"></div>
+  </section>
+
+</main>
+
+<!-- ============ ORDER PANEL ============ -->
+<aside id="panel">
+  <button class="panel-close" id="panelClose">✕</button>
+  <div class="panel-head">
+    <h2>A tua encomenda <span class="count-badge" id="countBadge">0</span>
+      <button class="clear-btn" id="clearBtn" style="display:none">limpar</button></h2>
+    <p>Entrega até 2 dias após confirmação do pedido.</p>
+  </div>
+  <div class="order-list" id="orderList">
+    <div class="empty-state" id="emptyState">
+      Monta a tua marmita ou escolhe uma sugestão da semana!
+    </div>
+  </div>
+  <div class="panel-foot">
+    <div class="pack-nudge" id="packNudge" style="display:none">
+      <div class="pack-text" id="packText"></div>
+      <div class="pack-dots" id="packDots"></div>
+    </div>
+    <div class="delivery-row">
+      <select id="deliverySel" aria-label="Zona de entrega">
+        <option value="" data-fee="0">Escolher zona de entrega</option>
+      </select>
+    </div>
+    <div class="totals">
+      <div class="row"><span>Subtotal</span><span id="subtotal">0,00 €</span></div>
+      <div class="row" id="packRow" style="display:none"><span id="packLabel">Desconto pack</span><span id="packVal"></span></div>
+      <div class="row"><span>Entrega</span><span id="deliveryFee">—</span></div>
+      <div class="grand"><span>Total</span><span class="val" id="grandTotal">0,00 €</span></div>
+    </div>
+    <button class="wa-btn" id="waBtn" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12a9.9 9.9 0 0 0 1.5 5.3L2 22l4.8-1.4A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.1 15.3l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 0 1 12 3.8m-3.1 4c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.3-.2-1-.5c-.2-.1-.9-.5-1.1-.5-.1 0-.3-.1-.4.1l-.6.8c-.1.1-.2.2-.4.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.3.1-.4l.5-.6c.1-.2.2-.3.1-.5l-.8-1.9c-.2-.4-.4-.4-.5-.4z"/></svg>
+      Enviar no WhatsApp
+    </button>
+    <button class="copy-btn" id="copyBtn">Copiar pedido</button>
+    <div class="wa-note">Envia o teu pedido para
+      <button class="wa-num" id="waNum" title="Clica para copiar o número">+351 911 832 176</button></div>
+    <div class="pay-note">Pagamento: MB Way · Dinheiro · Cartão · Edenred / Alimentação</div>
+  </div>
+</aside>
+
+<!-- mobile: fixed build-progress bar (only on the "Monta a tua" view) -->
+<div class="build-bar">
+  <div class="mini-box">
+    <i id="mini-base" class="empty"></i><i id="mini-side" class="empty"></i><i id="mini-prot" class="empty"></i>
+  </div>
+  <div class="build-bar-text">Escolhe 1 base + 1 acompanhamento + 1 proteína.</div>
+</div>
+
+<button class="cart-fab" id="mobileBar" aria-label="Ver encomenda">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M5.5 8h13l1 12.5h-15L5.5 8z"/>
+    <path d="M9 10.5V6.5a3 3 0 0 1 6 0v4"/>
+  </svg>
+  <span class="cart-count" id="mobileCount">0</span>
+</button>
+
+<div id="toast"></div>
+
+<script src="data/ingredientes.js"></script>
+<script src="data/semanas.js"></script>
+<script src="data/pokes.js"></script>
+<script src="data/outros.js"></script>
+<script src="data/zonas.js"></script>
+<script src="data/precos.js"></script>
+<script src="data/mensagens.js"></script>
+<script src="javascript/funcoes.js"></script>
+<script src="javascript/app.js"></script>
+</body>
+</html>

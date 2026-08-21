@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bué FIT! — O teu pedido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/app.css">
+</head>
+<body class="page-pedido">
+<div class="wrap">
+  <header class="ped-head">
+    <div class="ped-brand">
+      <div class="logo-mark"><img src="images/logo.jpg" alt="Bué FIT"></div>
+      <div class="wordmark">Bué<em>FIT!</em></div>
+    </div>
+    <div class="ped-title">
+      <h1>O teu pedido</h1>
+      <p class="sub">Resumo da encomenda</p>
+    </div>
+  </header>
+  <div id="result"></div>
+</div>
+
+<script src="data/ingredientes.js"></script>
+<script src="data/semanas.js"></script>
+<script src="data/pokes.js"></script>
+<script src="data/outros.js"></script>
+<script src="data/zonas.js"></script>
+<script src="data/precos.js"></script>
+<script src="javascript/funcoes.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const eur = n => n.toFixed(2).replace('.', ',') + ' €';
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function render(code){
+  const out = $('#result');
+  if (!code) {
+    out.innerHTML = '<div class="order-card"><div class="empty">Não encontrámos nenhum pedido neste link.</div></div>';
+    return;
+  }
+  const { items, zone, checksumOk, errors } = decodeOrderCode(code);
+  if (!items.length || errors.length || !checksumOk) {
+    out.innerHTML = '<div class="alert">Não foi possível ler este pedido — confirma que o link foi copiado por completo.</div>';
+    return;
+  }
+
+  const totals = orderTotals(items);
+  const fee = zone ? zone[1] : 0;
+  const total = totals.total + fee;
+
+  out.innerHTML = `<div class="order-card">
+    <div class="order-head"><h2>${items.reduce((s, o) => s + o.qty, 0)} itens</h2></div>
+    ${items.map(o => `
+      <div class="item">
+        <div class="q">${o.qty}×</div>
+        <div class="info">
+          <div class="t"><span class="tag">${esc(o.tag)}</span>${esc(o.title)}</div>
+          ${o.desc ? `<div class="d">${esc(o.desc)}</div>` : ''}
+        </div>
+        <div class="p">${eur(o.price * o.qty)}${o.extra ? `<small>inclui ${eur(o.extra * o.qty)} extras</small>` : ''}</div>
+      </div>`).join('')}
+    <div class="totals">
+      <div class="tot-line"><span>Subtotal</span><span>${eur(totals.subtotal)}</span></div>
+      ${totals.packs.map(p => `<div class="tot-line disc"><span>Pacote ${esc(p.label)} (${p.packs.join('+')})</span><span>−${eur(p.saving)}</span></div>`).join('')}
+      <div class="tot-line"><span>Entrega${zone ? ` (${esc(zone[0])})` : ''}</span><span>${zone ? eur(fee) : 'zona por definir'}</span></div>
+      <div class="tot-line grand"><span>Total</span><span>${eur(total)}</span></div>
+    </div>
+  </div>`;
+}
+
+render(new URLSearchParams(location.search).get('c'));
+</script>
+</body>
+</html>
