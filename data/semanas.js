@@ -11,6 +11,19 @@
 
 const WEEKS = {
 
+  '2026-33': [
+    'Baião de 2, Picadinho à brasileira',
+    'Arroz c/ açafrão, Brócolis, Almôndegas ao sugo',
+    'Tagliatelle cremoso com tomate cherry e camarão',
+    'Escondidinho de batata doce, Mozzarella, Carne picada',
+    'Arroz c/ amêndoas caramelizadas, Curgetes salteadas, Frango assado',
+    'Puré de abóbora, Brócolis e cenoura, Frango desfiado temperado',
+    'Fusili tricolor com tomate e atum',
+    'Arroz c/ salsa, Mix de repolho e cenoura, Rojões acebolados',
+    'Puré de batata, Couve mineira, Frango ao molho de laranja',
+    'Salada de quinoa (tomate cherry, brócolis, cogumelos e cenoura), Frango em cubos',
+  ],
+
   '2026-34': [
     'Penne ao molho branco c/ brócolis e frango',
     'Arroz c/ salsa, Feijão verde e cenoura, Frango à parmegiana',
