@@ -76,4 +76,9 @@ const WEEKS = {
       [ 'Sopa de Alho Francês',  0.0 ],
     ],
     sumos: [],
+  },
+
+  // ↑ Duplique a semana anterior e faça alterações
+  // ==============================================
+
  };
