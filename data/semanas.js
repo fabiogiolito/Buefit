@@ -57,5 +57,23 @@ const WEEKS = {
     ],
     sumos: [],
   },
-
-};
+   
+ '2026-35': {
+    marmitas: [
+      'Penne refogado no alho, Legumes salteados, Carne Picada',
+      'Batata Doce Assada, Cogumelos Salteados,Frango Grelhado',
+      'Espaguete à Napolitana',
+      'Arroz Branco, Cenoura, Strogonoff de Frango ',
+      'Tagliatelle c/ azeite trufado, Cogumelos Portobelo',
+      'Arroz c/ ervilha, Legumes salteados, Bifanas Aceboladas',
+      'Purê de batata, Cenoura, Fígado Acebolado',
+      'Lentilhas Refogadas, Curgetes, Frango em cubos',
+      'Arroz c/ açafrão, Mix de repolho, Carne Picada',
+      'Arroz Integral c/ lentilha, Salada de Pepino e hortelã, Quibe assado',
+    ],
+    sopas: [
+      [ 'Sopa de Cenoura',       0.0 ],
+      [ 'Sopa de Alho Francês',  0.0 ],
+    ],
+    sumos: [],
+ };
