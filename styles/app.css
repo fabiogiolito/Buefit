@@ -327,6 +327,17 @@ h2.section{
 .wiz-panes::-webkit-scrollbar-thumb{background:var(--cream-3);border-radius:3px}
 .chip-pane{display:none}
 .chip-pane.active{display:block}
+/* barra segmentada: categoria do compartimento (por defeito a do passo) */
+.cat-tabs{display:flex;gap:3px;padding:3px;background:var(--cream-2);border-radius:999px;margin:0 0 14px}
+.cat-tab{
+  flex:1;border:0;background:transparent;border-radius:999px;padding:7px 4px;
+  font:inherit;font-size:11px;font-weight:700;color:var(--olive-soft);cursor:pointer;
+  transition:background .2s,color .2s,box-shadow .2s;white-space:nowrap;
+}
+.cat-tab:hover{color:var(--olive)}
+.cat-tab.on{background:var(--paper);color:var(--olive-ink);box-shadow:0 1px 3px rgba(59,66,41,.12)}
+.cat-list{display:none}
+.cat-list.active{display:block}
 .chip-group-label{
   font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
   color:var(--olive-soft);margin:20px 0 5px;padding-left:10px;

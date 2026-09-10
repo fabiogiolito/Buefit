@@ -132,7 +132,8 @@ function packProgress(items){
    Formato: BF-[W<ano><semana>]-<item>-<item>-…-E<zona>-<check>
    W2633: menu da semana 33 de 2026 (presente quando o pedido tem
           marmitas, sopas ou sumos semanais; diz ao decode que menu usar)
-   Item:  [qtd]B3A5P12L    marmita própria (códigos do menu + tamanho)
+   Item:  [qtd]B3A5P12L    marmita própria: 3 compartimentos, cada um com
+                           código B/A/P (qualquer mistura, ex. B3B5P12) + tamanho
           [qtd]S4M         marmita semanal nº4, tamanho M
           [qtd]K1B2I1.3.5  poke (tipo nº1, base nº2, ingredientes 1,3,5)
           [qtd]D2          sobremesa (nº na lista de sobremesas.js)
@@ -161,7 +162,7 @@ function encodeOrderCode(order, zoneName){
   if (order.some(o => /^(week:|SOPA:|SUMO:)/.test(o.key))) segs.push(weekTokenFor(ACTIVE_WEEK_KEY));
   for (const o of order) {
     let tok = null, m;
-    if ((m = o.key.match(/^marmita:(B\d+)\+(A\d+)\+(P\d+):(M|L)$/))) {
+    if ((m = o.key.match(/^marmita:([BAP]\d+)\+([BAP]\d+)\+([BAP]\d+):(M|L)$/))) {
       tok = m[1] + m[2] + m[3] + m[4];
     } else if ((m = o.key.match(/^week:(\d+):(M|L)$/))) {
       tok = 'S' + m[1] + m[2];
@@ -230,13 +231,15 @@ function decodeOrderCode(input){
     const tok = parts[2];
     let m;
 
-    if ((m = tok.match(/^B(\d+)A(\d+)P(\d+)(M|L)$/))) {
-      const b = findByCode(BASES, 'B' + m[1]), a = findByCode(SIDES, 'A' + m[2]), p = findByCode(PROTS, 'P' + m[3]);
-      if (!b || !a || !p) { errors.push(`Ingrediente desconhecido em “${seg}”`); continue; }
-      const extra = b[2] + a[2] + p[2];
+    if ((m = tok.match(/^([BAP]\d+)([BAP]\d+)([BAP]\d+)(M|L)$/))) {
+      // 3 compartimentos, qualquer mistura de categorias (B1A2P3, B1B2P3, A4P2P2…)
+      const LISTS = { B: BASES, A: SIDES, P: PROTS };
+      const picks = [m[1], m[2], m[3]].map(c => findByCode(LISTS[c[0]], c));
+      if (picks.includes(null)) { errors.push(`Ingrediente desconhecido em “${seg}”`); continue; }
+      const extra = picks.reduce((s, it) => s + it[2], 0);
       items.push({
-        qty, kind: 'propria', tag: m[4], title: `Marmita B${m[1]}+A${m[2]}+P${m[3]}`,
-        desc: `${b[1]} + ${a[1]} + ${p[1]}`,
+        qty, kind: 'propria', tag: m[4], title: `Marmita ${[m[1], m[2], m[3]].join('+')}`,
+        desc: picks.map(it => it[1]).join(' + '),
         price: PRECOS.propria[m[4]][1] + extra, extra,
       });
     } else if (tok === wSeg) {

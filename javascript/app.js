@@ -522,6 +522,7 @@ const marmita = (() => {
     const t = sEl('text', {class:'hint-label', 'text-anchor':'middle', y:'7'}, lg);
     t.textContent = b.label;
     hintG[s] = hg;
+    b.labelEl = t;
   }
 
   /* ---- áreas clicáveis por compartimento (por cima da comida) ---- */
@@ -723,6 +724,8 @@ const marmita = (() => {
     hintG[slot].classList.remove('hidden');
   }
   function clearAll(){ ['base','side','prot'].forEach(clear); }
+  // etiqueta do compartimento (segue a categoria escolhida; null = a original)
+  function label(slot, text){ BANDS[slot].labelEl.textContent = text || BANDS[slot].label; }
   function step(s){
     for (const k in hintG) hintG[k].classList.toggle('on', k === s);
   }
@@ -733,49 +736,84 @@ const marmita = (() => {
     if (e.target === this) this.style.animation = 'none';
   });
 
-  return { fill, clear, clearAll, step, onSlotClick: fn => { slotClickFn = fn; } };
+  return { fill, clear, clearAll, label, step, onSlotClick: fn => { slotClickFn = fn; } };
 })();
 
 /* ============================================================
    BUILDER
 ============================================================ */
+/* A marmita tem 3 compartimentos (base, side, prot). Cada um traz uma
+   categoria por defeito com o mesmo nome, mas o cliente pode trocá-la
+   (ex.: dupla proteína) — slotCat guarda a categoria ativa por compartimento. */
 const sel = { base: null, side: null, prot: null, size: 'M' };
+const slotCat = { base: 'base', side: 'side', prot: 'prot' };
 const STEP_ORDER = ['base', 'side', 'prot'];
 const WIZ_STEPS = ['base', 'side', 'prot', 'summary'];
-const STEP_META = {
-  base:    { label: 'Base',           title: 'Escolhe a tua base' },
-  side:    { label: 'Acompanhamento', title: 'Escolhe o teu acompanhamento' },
-  prot:    { label: 'Proteína',       title: 'Escolhe a tua proteína' },
-  summary: { label: 'Resumo' },
+const CATS = { base: BASES, side: SIDES, prot: PROTS };
+const CAT_META = {
+  base: { label: 'Base',           short: 'BASE',     title: 'Escolhe a tua base' },
+  side: { label: 'Acompanhamento', short: 'ACOMP.',   title: 'Escolhe o teu acompanhamento' },
+  prot: { label: 'Proteína',       short: 'PROTEÍNA', title: 'Escolhe a tua proteína' },
 };
+const catOf = item => ({ B: 'base', A: 'side', P: 'prot' })[item[0][0]];
 let wizStep = 'base';
 
-function renderChips(pane, items, groups, slot){
-  const container = $('#pane-' + pane);
-  const makeChips = subset => {
-    const wrap = el('div', 'chips');
-    subset.forEach(it => {
-      const [code, name, sup] = it;
-      const chip = el('button', 'chip');
-      chip.dataset.code = code;
-      chip.innerHTML = `<span class="code">${code}</span>${name}${sup ? `<span class="sup">+${sup.toFixed(1).replace('.', ',')}€</span>` : ''}`;
-      chip.addEventListener('click', () => pick(slot, it));
-      wrap.appendChild(chip);
-    });
-    return wrap;
-  };
-  if (groups) {
-    groups.forEach(label => {
-      container.appendChild(el('div', 'chip-group-label', label));
-      container.appendChild(makeChips(items.filter(it => it[4] === label)));
-    });
-  } else {
-    container.appendChild(makeChips(items));
-  }
+function renderChips(slot){
+  const container = $('#pane-' + slot);
+  const tabs = el('div', 'cat-tabs');
+  tabs.setAttribute('role', 'tablist');
+  Object.keys(CATS).forEach(cat => {
+    const b = el('button', 'cat-tab' + (cat === slot ? ' on' : ''), CAT_META[cat].label);
+    b.dataset.cat = cat;
+    b.setAttribute('role', 'tab');
+    b.addEventListener('click', () => setSlotCat(slot, cat));
+    tabs.appendChild(b);
+  });
+  container.appendChild(tabs);
+
+  Object.entries(CATS).forEach(([cat, items]) => {
+    const list = el('div', 'cat-list' + (cat === slot ? ' active' : ''));
+    list.dataset.cat = cat;
+    const makeChips = subset => {
+      const wrap = el('div', 'chips');
+      subset.forEach(it => {
+        const [code, name, sup] = it;
+        const chip = el('button', 'chip');
+        chip.dataset.code = code;
+        chip.innerHTML = `<span class="code">${code}</span>${name}${sup ? `<span class="sup">+${sup.toFixed(1).replace('.', ',')}€</span>` : ''}`;
+        chip.addEventListener('click', () => pick(slot, it));
+        wrap.appendChild(chip);
+      });
+      return wrap;
+    };
+    const groups = groupsOf(items);
+    if (groups) {
+      groups.forEach(label => {
+        list.appendChild(el('div', 'chip-group-label', label));
+        list.appendChild(makeChips(items.filter(it => it[4] === label)));
+      });
+    } else {
+      list.appendChild(makeChips(items));
+    }
+    container.appendChild(list);
+  });
+}
+
+/* troca a categoria de um compartimento: mostra a lista certa, atualiza
+   a etiqueta na marmita e o título do passo */
+function setSlotCat(slot, cat){
+  slotCat[slot] = cat;
+  const pane = $('#pane-' + slot);
+  pane.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('on', t.dataset.cat === cat));
+  pane.querySelectorAll('.cat-list').forEach(l => l.classList.toggle('active', l.dataset.cat === cat));
+  marmita.label(slot, cat === slot ? null : CAT_META[cat].short);
+  $('#wizPanes').scrollTop = 0;
+  updateWizardUI();
 }
 
 function pick(slot, item, { advance = true } = {}){
   sel[slot] = item;
+  if (slotCat[slot] !== catOf(item)) setSlotCat(slot, catOf(item));
   const pane = $('#pane-' + slot);
   pane.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
   pane.querySelector(`.chip[data-code="${item[0]}"]`)?.classList.add('selected');
@@ -803,7 +841,7 @@ function pick(slot, item, { advance = true } = {}){
 /* clicar num compartimento da ilustração troca por outra opção aleatória
    (respeita as restrições alimentares; nunca repete a atual) */
 marmita.onSlotClick(slot => {
-  const items = { base: BASES, side: SIDES, prot: PROTS }[slot];
+  const items = CATS[slotCat[slot]];
   const ok = items.filter(it => it !== sel[slot] && !violatesAny(it[0], activeDiets));
   const pool = ok.length ? ok : items.filter(it => it !== sel[slot]);
   if (!pool.length) return;
@@ -828,8 +866,9 @@ function updateRecipe(){
 
 /* refresh header, dots, rings and footer for the current wizard step */
 function updateWizardUI(){
-  const meta = STEP_META[wizStep];
-  $('#wizStepLabel').textContent = wizStep === 'summary' ? 'Resumo · escolhe o tamanho' : meta.title;
+  $('#wizStepLabel').textContent = wizStep === 'summary' ? 'Resumo · escolhe o tamanho'
+    : slotCat[wizStep] === wizStep ? CAT_META[wizStep].title
+    : `Compartimento ${STEP_ORDER.indexOf(wizStep) + 1} · ${CAT_META[slotCat[wizStep]].label}`;
   $('#wizBack').hidden = wizStep === 'base';
   [...$('#wizDots').children].forEach((d, i) => d.classList.toggle('on', WIZ_STEPS[i] === wizStep));
   marmita.step(STEP_ORDER.includes(wizStep) ? wizStep : null);
@@ -841,7 +880,7 @@ function updateWizardUI(){
     $('#wizHint').textContent = '';
   } else {
     btn.style.display = 'none';
-    $('#wizHint').textContent = 'Escolhe 1 base + 1 acompanhamento + 1 proteína.';
+    $('#wizHint').textContent = 'Uma escolha por compartimento. Podes trocar a categoria em cada passo.';
   }
 }
 
@@ -849,7 +888,7 @@ function renderSummary(){
   $('#recipeCode').textContent = STEP_ORDER.map(s => sel[s][0]).join(' + ');
   $('#summaryLines').innerHTML = STEP_ORDER.map(s => {
     const [code, name] = sel[s];
-    return `<div class="summary-line"><span class="sl-code">${code}</span>${name}<span class="sl-cat">${STEP_META[s].label}</span></div>`;
+    return `<div class="summary-line"><span class="sl-code">${code}</span>${name}<span class="sl-cat">${CAT_META[catOf(sel[s])].label}</span></div>`;
   }).join('');
   updateDietAlert();
 }
@@ -902,8 +941,11 @@ $('#sizeToggle').addEventListener('click', e => {
   updateRecipe();
 });
 
+function resetCats(){ STEP_ORDER.forEach(s => { if (slotCat[s] !== s) setSlotCat(s, s); }); }
+
 $('#recipeClear').addEventListener('click', () => {
   STEP_ORDER.forEach(clearSlot); // empties chips, 3D box and mini-box
+  resetCats();
   updateRecipe();
   setStep('base');
 });
@@ -945,6 +987,7 @@ function resetBox(){
   // clear selection + chips
   STEP_ORDER.forEach(s => { sel[s] = null; });
   document.querySelectorAll('.chip.selected').forEach(c => c.classList.remove('selected'));
+  resetCats();
 
   // hide instantly (the clone is flying); then slide a fresh box in
   const wrap = $('#sceneWrap');
@@ -962,9 +1005,7 @@ function resetBox(){
   }, 420);
 }
 
-renderChips('base', BASES, groupsOf(BASES), 'base');
-renderChips('side', SIDES, groupsOf(SIDES), 'side');
-renderChips('prot', PROTS, groupsOf(PROTS), 'prot');
+STEP_ORDER.forEach(renderChips);
 
 /* ---- filtro de dietas ----
    As restrições vivem na última coluna de ingredientes.js e a lista
@@ -1033,8 +1074,8 @@ $('#randomBtn').addEventListener('click', () => {
     const ok = items.filter(it => !violatesAny(it[0], activeDiets));
     return ok.length ? ok : items;
   };
-  [['base', BASES], ['side', SIDES], ['prot', PROTS]].forEach(([slot, items], i) => {
-    setTimeout(() => pick(slot, rand(allowed(items))), i * 380);
+  STEP_ORDER.forEach((slot, i) => {
+    setTimeout(() => pick(slot, rand(allowed(CATS[slotCat[slot]]))), i * 380);
   });
 });
 
