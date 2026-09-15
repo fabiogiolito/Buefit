@@ -118,7 +118,7 @@ const WEEKS = {
   },
      '2026-38': {
     marmitas: [
-      'Arroz com cenoura, couve mineira, frango com mostarda',
+      'Arroz com cenoura, couve mineira, frango aomolho de mostarda e mel',
       'Creme de cenoura, feijão verde e milho, frango desfiado ',
       'Arroz à grega,cenouras refogadas, frango assado',
       'Escondidinho de batata doce, mozzarella,carne picada',
@@ -127,7 +127,7 @@ const WEEKS = {
       'Arroz com coentros,carne estufada com abóbora',
       'Espaguete refogado, cenouras e brócolis,hambúrguer grelhado',
       'Grão de bico refogado,espinafres,tofu ao molho de soja e alho',
-      'Batata gratinada,brócolis, frango desfiado ',
+      'Batata gratinada, brócolis,frango desfiado ',
     ],
     sopas: [
       [ 'Sopa de Legumes ',       0.0 ],
