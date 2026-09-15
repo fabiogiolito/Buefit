@@ -118,7 +118,7 @@ const WEEKS = {
   },
      '2026-38': {
     marmitas: [
-      'Arroz com cenoura, couve mineira, frango aomolho de mostarda e mel',
+      'Arroz com cenoura, couve mineira, frango ao molho de mostarda e mel',
       'Creme de cenoura, feijão verde e milho, frango desfiado ',
       'Arroz à grega,cenouras refogadas, frango assado',
       'Escondidinho de batata doce, mozzarella,carne picada',
