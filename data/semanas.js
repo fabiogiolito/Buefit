@@ -135,6 +135,26 @@ const WEEKS = {
     ],
     sumos: [],
   },
+
+       '2026-39': {
+    marmitas: [
+      'Arroz com brócolis, caril de frango ao molho de coco',
+      'Hummus de grão de bico,beterraba,carne picada ',
+      'Arroz com salsa,bifinhos de peru com natas e cogumelos',
+      'Espaguete a bolonhesa',
+      'Abóboras assadas,grelos refogados,rojões acebolados ',
+      'Penne cremoso com brócolis e parmesão, frango em cubos',
+      'Arroz chau chau, cogumelos salteados,tiras de porco agri doce',
+      'Arroz colorido,legumes salteados,peru grelhado',
+      'Purê de batata, couve mineira,fígado acebolado',
+      'Cuscuz vegetariano,couve flor refogado, lascas de peixe ',
+    ],
+    sopas: [
+      [ 'Sopa de Ervilha ',       0.0 ],
+      [ 'Sopa de Abóbora',  0.0 ],
+    ],
+    sumos: [],
+  },
   // ↑ Duplique a semana anterior e faça alterações
   // ==============================================
 
