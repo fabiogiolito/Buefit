@@ -144,10 +144,10 @@ const WEEKS = {
       'Espaguete a bolonhesa',
       'Abóboras assadas,grelos refogados,rojões acebolados ',
       'Penne cremoso com brócolis e parmesão, frango em cubos',
-      'Arroz chau chau, cogumelos salteados,tiras de porco agri doce',
+      'Arroz chau chau, cogumelos salteados,tiras de porco agridoce',
       'Arroz colorido,legumes salteados,peru grelhado',
       'Purê de batata, couve mineira,fígado acebolado',
-      'Cuscuz vegetariano,couve flor refogado, lascas de peixe ',
+      'Cuscuz vegetariano,couve flor refogada, lascas de peixe ',
     ],
     sopas: [
       [ 'Sopa de Ervilha ',       0.0 ],
