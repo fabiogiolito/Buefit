@@ -29,8 +29,8 @@
   </a>
   <nav class="home-links">
     <a href="#produtos">O que fazemos</a>
-    <a href="#como">Como funciona</a>
     <a href="#menu">Menu da semana</a>
+    <a href="#galeria">Galeria</a>
     <a href="#entregas">Entregas</a>
   </nav>
   <a class="btn" href="encomendar.html">Encomendar</a>
@@ -42,48 +42,79 @@
   <section class="hero">
     <div class="hero-text">
       <p class="eyebrow">Marmitas por encomenda · Grande Lisboa</p>
-      <h1>Comida saudável, feita para a tua semana.</h1>
-      <p class="lead">Marmitas preparadas por encomenda e entregues em tua casa, com um menu novo todas as semanas. Escolhe as nossas sugestões ou monta a tua, do teu jeito.</p>
+      <h1>Comida a sério, pronta para a tua semana.</h1>
+      <p class="lead">Marmitas e poke bowls preparados por encomenda, com um menu novo todas as semanas. Entregamos em tua casa.</p>
       <div class="cta-row">
-        <a class="btn big" href="encomendar.html">Encomendar agora</a>
-        <a class="btn big ghost" href="#menu">Ver menu da semana</a>
+        <a class="btn big light" href="encomendar.html">Encomendar agora</a>
+        <a class="btn big outline-light" href="#menu">Ver menu da semana</a>
       </div>
       <p class="hero-note">Marmitas desde <b id="fromPrice"></b> · Tamanhos M (300g) e L (400g)</p>
     </div>
-    <div class="hero-art"><img src="images/chef_01.svg" alt="Chef Bué FIT"></div>
+    <div class="hero-media" aria-hidden="true">
+      <div class="col">
+        <img src="images/galeria/04.jpg" alt="">
+        <video src="images/galeria/13.mp4" poster="images/galeria/13.poster.jpg" autoplay muted loop playsinline></video>
+        <img src="images/galeria/02.jpg" alt="">
+      </div>
+      <div class="col">
+        <video src="images/galeria/05.mp4" poster="images/galeria/05.poster.jpg" autoplay muted loop playsinline></video>
+        <img src="images/galeria/10.jpg" alt="">
+        <img src="images/galeria/06.jpg" alt="">
+      </div>
+      <div class="col">
+        <img src="images/galeria/01.jpg" alt="">
+        <img src="images/galeria/11.jpg" alt="">
+        <img src="images/galeria/12.jpg" alt="">
+      </div>
+    </div>
   </section>
 
   <!-- ============ PRODUTOS ============ -->
   <section id="produtos">
-    <h2>O que fazemos</h2>
+    <h2>Escolhe o que te apetece</h2>
     <p class="sub">Tudo preparado por encomenda, para comeres bem sem perder tempo na cozinha.</p>
-    <div class="cards">
-      <a class="card" href="encomendar.html#week">
-        <h3>Menu da semana</h3>
-        <p>Sugestões de marmitas completas, renovadas todas as semanas, com sopas a acompanhar.</p>
-        <span class="more">Ver menu →</span>
+    <div class="features">
+      <a class="feature" href="encomendar.html#week">
+        <img src="images/galeria/12.jpg" alt="Marmita de arroz com brócolos e frango com molho cremoso" loading="lazy">
+        <div class="feature-text">
+          <h3>Menu da semana</h3>
+          <p>Marmitas completas, com sugestões novas todas as semanas.</p>
+          <span class="more">Ver menu →</span>
+        </div>
       </a>
-      <a class="card" href="encomendar.html#build">
-        <h3>Monta a tua</h3>
-        <p>Escolhe a base, o acompanhamento e a proteína. Filtra pelos ingredientes que respeitam as tuas restrições alimentares.</p>
-        <span class="more">Montar marmita →</span>
+      <a class="feature" href="encomendar.html#poke">
+        <img src="images/galeria/06.jpg" alt="Três poke bowls de salmão e frango com manga, abacate e edamame" loading="lazy">
+        <div class="feature-text">
+          <h3>Poke bowls</h3>
+          <p>O teu poke, uma base e cinco ingredientes à tua escolha.</p>
+          <span class="more">Montar poke →</span>
+        </div>
       </a>
-      <a class="card" href="encomendar.html#poke">
-        <h3>Poke bowls</h3>
-        <p>Escolhe o teu poke, uma base e cinco ingredientes à tua escolha.</p>
-        <span class="more">Montar poke →</span>
-      </a>
-      <a class="card" href="encomendar.html#extras">
-        <h3>Sobremesas</h3>
-        <p>O toque final da tua encomenda.</p>
-        <span class="more">Ver sobremesas →</span>
-      </a>
-      <a class="card olive" href="encomendar.html#pacotes">
-        <h3>Pacotes</h3>
-        <p>Quantas mais marmitas, menor o preço por unidade. O desconto é aplicado automaticamente na encomenda.</p>
-        <span class="more">Ver pacotes →</span>
+      <a class="feature" href="encomendar.html#build">
+        <img src="images/galeria/10.jpg" alt="Marmita com puré, cenoura e carne picada, ao lado do mesmo prato servido" loading="lazy">
+        <div class="feature-text">
+          <h3>Monta a tua</h3>
+          <p>Base, acompanhamento e proteína, do teu jeito e com as tuas restrições alimentares.</p>
+          <span class="more">Montar marmita →</span>
+        </div>
       </a>
     </div>
+    <div class="extras-links">
+      <a href="encomendar.html#extras"><b>Sobremesas</b><span>O toque final da tua encomenda →</span></a>
+      <a href="encomendar.html#pacotes"><b>Pacotes</b><span>Quantas mais marmitas, menor o preço por unidade →</span></a>
+    </div>
+  </section>
+
+  <!-- ============ MARCA ============ -->
+  <section class="story">
+    <video class="autoplay" src="images/galeria/03.mp4" poster="images/galeria/03.poster.jpg" muted loop playsinline preload="none" aria-label="A escrever o menu da semana no quadro da cozinha"></video>
+    <div class="story-text">
+      <img src="images/chef_05.svg" alt="">
+      <h2>Take me away to better days.</h2>
+      <p>Todas as semanas escrevemos um menu novo no quadro da cozinha e cozinhamos cada encomenda. Tu só tens de escolher, receber e aproveitar a semana.</p>
+      <a class="btn big light" href="encomendar.html">Quero a minha</a>
+    </div>
+    <img src="images/galeria/08.jpg" alt="Saco Bué FIT entregue à janela do carro" loading="lazy">
   </section>
 
   <!-- ============ COMO FUNCIONA ============ -->
@@ -110,12 +141,15 @@
   </section>
 
   <!-- ============ MENU DA SEMANA ============ -->
-  <section id="menu">
-    <h2>Menu desta semana</h2>
-    <p class="sub">Sugestões de marmitas, renovadas todas as semanas.</p>
-    <ol class="menu-list" id="menuList"></ol>
-    <p class="menu-soups" id="menuSoups" hidden></p>
-    <div class="cta-row"><a class="btn big" href="encomendar.html#week">Encomendar do menu</a></div>
+  <section id="menu" class="menu">
+    <img src="images/galeria/02.jpg" alt="Marmitas Bué FIT com frango, batata assada e esparguete com almôndegas" loading="lazy">
+    <div>
+      <h2>Menu desta semana</h2>
+      <p class="sub">Sugestões de marmitas, renovadas todas as semanas.</p>
+      <ol class="menu-list" id="menuList"></ol>
+      <p class="menu-soups" id="menuSoups" hidden></p>
+      <div class="cta-row"><a class="btn big" href="encomendar.html#week">Encomendar do menu</a></div>
+    </div>
   </section>
 
   <!-- ============ GALERIA ============ -->
@@ -136,7 +170,6 @@
 
   <!-- ============ CTA FINAL ============ -->
   <section class="closing">
-    <img src="images/chef_05.svg" alt="">
     <h2>Pronto para comer bem esta semana?</h2>
     <div class="cta-row">
       <a class="btn big light" href="encomendar.html">Encomendar agora</a>
@@ -160,36 +193,8 @@
    para o browser/CDN nunca usar versões antigas (menus desatualizados). */
 [
   'data/ingredientes.js', 'data/semanas.js', 'data/pokes.js', 'data/zonas.js',
-  'data/precos.js', 'data/mensagens.js', 'data/galeria.js', 'javascript/funcoes.js',
+  'data/precos.js', 'data/mensagens.js', 'data/galeria.js', 'javascript/funcoes.js', 'javascript/home.js',
 ].forEach(f => document.write(`<script src="${f}?t=${Date.now()}"><\/script>`));
-</script>
-<script>
-const $ = s => document.querySelector(s);
-const eur = n => n.toFixed(2).replace('.', ',') + ' €';
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-$('#fromPrice').textContent = eur(PRECOS.semanal.M[1]);
-
-$('#menuList').innerHTML = WEEK.marmitas.map(m => `<li>${esc(m.trim())}</li>`).join('');
-if (WEEK.sopas.length) {
-  $('#menuSoups').hidden = false;
-  $('#menuSoups').innerHTML = '<b>Sopas da semana:</b> ' + WEEK.sopas.map(s => esc(s[0])).join(' · ');
-}
-
-$('#zoneList').innerHTML = ZONES.map(z => `<li><span>${esc(z[0])}</span><b>${eur(z[1])}</b></li>`).join('');
-
-$('#waLink').href = $('#waFoot').href = 'https://wa.me/' + WHATSAPP_NUMERO.replace(/\D/g, '');
-
-if (GALERIA.length) {
-  $('#gallery').hidden = false;
-  $('#gallery').innerHTML = GALERIA.map(([file, alt, link]) => {
-    const src = 'images/galeria/' + encodeURIComponent(file);
-    const media = /\.(mp4|webm|mov)$/i.test(file)
-      ? `<video src="${src}" muted loop playsinline controls preload="metadata" aria-label="${esc(alt || '')}"></video>`
-      : `<img src="${src}" alt="${esc(alt || '')}" loading="lazy">`;
-    return link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${media}</a>` : `<div>${media}</div>`;
-  }).join('');
-}
 </script>
 </body>
 </html>
