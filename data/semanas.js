@@ -38,6 +38,8 @@ const WEEKS = {
     sumos: [],
   },
 
+  // ========================================================================
+
   '2026-34': {
     marmitas: [
       'Penne Ao Molho Branco c/ Brócolis e frango',
@@ -57,6 +59,8 @@ const WEEKS = {
     ],
     sumos: [],
   },
+
+  // ========================================================================
    
  '2026-35': {
     marmitas: [
@@ -77,6 +81,8 @@ const WEEKS = {
     ],
     sumos: [],
   },
+
+  // ========================================================================
    
  '2026-36': {
     marmitas: [
@@ -97,7 +103,10 @@ const WEEKS = {
     ],
     sumos: [],
   },
-    '2026-37': {
+
+  // ========================================================================
+
+  '2026-37': {
     marmitas: [
       'Arroz c/ brócolis,frango desfiado c/ alho francês',
       'Panqueca à brasileira, carne picada ',
@@ -116,7 +125,10 @@ const WEEKS = {
     ],
     sumos: [],
   },
-     '2026-38': {
+
+  // ========================================================================
+
+  '2026-38': {
     marmitas: [
       'Arroz com cenoura, couve mineira, frango ao molho de mostarda e mel',
       'Creme de cenoura, feijão verde e milho, frango desfiado ',
@@ -136,7 +148,9 @@ const WEEKS = {
     sumos: [],
   },
 
-       '2026-39': {
+  // ========================================================================
+
+  '2026-39': {
     marmitas: [
       'Arroz com brócolis, caril de frango ao molho de coco',
       'Hummus de grão de bico,beterraba,carne picada ',
@@ -155,8 +169,10 @@ const WEEKS = {
     ],
     sumos: [],
   },
+
+  // ========================================================================
    
-       '2026-40': {
+  '2026-40': {
     marmitas: [
       'Arroz Branco, cenouras salteadas, strogonoff de frango',
       'Escondidinho de mandioca,carne de vitella desfiada ',
@@ -174,6 +190,10 @@ const WEEKS = {
       [ 'Sopa de Cenoura',  0.0 ],
     ],
     sumos: [],
+  },
+
+
+  
   // ↑ Duplique a semana anterior e faça alterações
   // ==============================================
 
