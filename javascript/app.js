@@ -447,6 +447,8 @@ $('#nav').addEventListener('click', e => {
   view.classList.remove('active'); void view.offsetWidth;
   view.classList.add('active');
 });
+/* links da página inicial abrem logo a aba certa (encomendar.html#poke) */
+document.querySelector(`.nav-btn[data-view="${CSS.escape(location.hash.slice(1))}"]`)?.click();
 
 /* ============================================================
    MARMITA SVG — ilustração isométrica do builder

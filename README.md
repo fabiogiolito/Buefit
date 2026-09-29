@@ -13,6 +13,9 @@ Todos os dados do site estão na pasta **`data/`**:
 | `data/pokes.js` | Tipos, bases e ingredientes dos pokes | Às vezes |
 | `data/zonas.js` | Zonas de entrega e taxas | Raramente |
 | `data/mensagens.js` | Número de WhatsApp e mensagem do pedido | Raramente |
+| `data/galeria.js` | Fotos e vídeos da página inicial (ficheiros em `images/galeria/`) | Às vezes |
+
+A página inicial (`index.html`) apresenta a marca; a encomenda faz-se em `encomendar.html`.
 
 ---
 
