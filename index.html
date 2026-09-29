@@ -76,7 +76,6 @@
         <img src="images/galeria/12.jpg" alt="Marmita de arroz com brócolos e frango com molho cremoso" loading="lazy">
         <div class="feature-text">
           <h3>Menu da semana</h3>
-          <p>Marmitas completas, com sugestões novas todas as semanas.</p>
           <span class="more">Ver menu →</span>
         </div>
       </a>
@@ -84,7 +83,6 @@
         <img src="images/galeria/06.jpg" alt="Três poke bowls de salmão e frango com manga, abacate e edamame" loading="lazy">
         <div class="feature-text">
           <h3>Poke bowls</h3>
-          <p>O teu poke, uma base e cinco ingredientes à tua escolha.</p>
           <span class="more">Montar poke →</span>
         </div>
       </a>
@@ -92,30 +90,32 @@
         <img src="images/galeria/10.jpg" alt="Marmita com puré, cenoura e carne picada, ao lado do mesmo prato servido" loading="lazy">
         <div class="feature-text">
           <h3>Monta a tua</h3>
-          <p>Base, acompanhamento e proteína, do teu jeito e com as tuas restrições alimentares.</p>
           <span class="more">Montar marmita →</span>
         </div>
       </a>
     </div>
     <div class="extras-links">
-      <a href="encomendar.html#extras"><b>Sobremesas</b><span>O toque final da tua encomenda →</span></a>
-      <a href="encomendar.html#pacotes"><b>Pacotes</b><span>Quantas mais marmitas, menor o preço por unidade →</span></a>
+      <a href="encomendar.html#extras"><b>Sobremesas</b><span>Ver sobremesas →</span></a>
+      <a href="encomendar.html#pacotes"><b>Pacotes</b><span>Ver descontos →</span></a>
     </div>
     <ol class="steps" id="como">
       <li>
+        <img src="images/chef_03.svg" alt="" loading="lazy">
         <span class="step-num">01</span>
         <h3>Escolhe</h3>
-        <p>Monta a tua encomenda no site: marmitas do menu da semana, marmitas personalizadas, pokes e sobremesas.</p>
+        <p>Monta a tua encomenda no site.</p>
       </li>
       <li>
+        <img src="images/chef_04.svg" alt="" loading="lazy">
         <span class="step-num">02</span>
         <h3>Envia no WhatsApp</h3>
-        <p>O pedido segue pronto para o nosso WhatsApp. Confirmamos contigo e combinamos a entrega.</p>
+        <p>Confirmamos contigo e combinamos a entrega.</p>
       </li>
       <li id="entregas">
+        <img src="images/chef_05.svg" alt="" loading="lazy">
         <span class="step-num">03</span>
         <h3>Recebe em casa</h3>
-        <p>Pagas por MB Way, dinheiro, cartão ou Edenred / Alimentação. Entregamos em:</p>
+        <p>MB Way, dinheiro, cartão ou Edenred.</p>
         <ul class="zones" id="zoneList"></ul>
       </li>
     </ol>
@@ -123,23 +123,23 @@
 
   <!-- ============ PREÇOS E PACOTES ============ -->
   <section id="precos" class="prices">
-    <div class="prices-text">
-      <h2>Preços e pacotes</h2>
-      <p>Encomenda para a semana inteira e paga menos por marmita. Quanto maior o pacote, maior o desconto, aplicado automaticamente na encomenda.</p>
-      <ul class="prices-who">
-        <li><b>Para ti</b> Almoços e jantares da semana resolvidos.</li>
-        <li><b>Para a família</b> Juntem os pedidos de casa num só pacote.</li>
-        <li><b>Para a equipa</b> Encomendem em conjunto na empresa e dividam o desconto.</li>
-      </ul>
-      <div class="cta-row">
-        <a class="btn big" href="encomendar.html">Encomendar</a>
-        <a class="btn big ghost" href="encomendar.html#pacotes">Ver todos os pacotes</a>
+    <div class="prices-head">
+      <img class="chef" src="images/chef_01.svg" alt="" loading="lazy">
+      <div>
+        <h2>Preços e pacotes</h2>
+        <p>Para ti, para a família ou para a equipa: quanto mais marmitas, menos pagas por cada uma.</p>
+      </div>
+      <div class="size-pick" id="packSize">
+        <button data-size="M" class="on">M · 300g</button>
+        <button data-size="L">L · 400g</button>
       </div>
     </div>
-    <div>
-      <!-- preços lidos de data/precos.js (menu da semana) -->
-      <ol class="pack-list" id="packList"></ol>
-      <p class="prices-note">Preços por marmita do menu da semana, tamanhos M (300g) e L (400g). Os pacotes contam marmitas do mesmo grupo e tamanho.</p>
+    <!-- preços lidos de data/precos.js (menu da semana) -->
+    <ol class="pack-chart" id="packList"></ol>
+    <p class="prices-note">Número de marmitas do menu da semana · preço por marmita</p>
+    <div class="cta-row">
+      <a class="btn big" href="encomendar.html">Encomendar</a>
+      <a class="btn big ghost" href="encomendar.html#pacotes">Ver todos os pacotes</a>
     </div>
   </section>
 
@@ -147,9 +147,9 @@
   <section class="story">
     <video class="autoplay" src="images/galeria/03.mp4" poster="images/galeria/03.poster.jpg" muted loop playsinline preload="none" aria-label="A escrever o menu da semana no quadro da cozinha"></video>
     <div class="story-text">
-      <img src="images/chef_05.svg" alt="">
+      <img class="chef-light" src="images/chef_02.svg" alt="">
       <h2>Take me away to better days.</h2>
-      <p>Todas as semanas escrevemos um menu novo no quadro da cozinha e cozinhamos cada encomenda. Tu só tens de escolher, receber e aproveitar a semana.</p>
+      <p>Menu novo todas as semanas, cozinhado por encomenda.</p>
       <a class="btn big light" href="encomendar.html">Quero a minha</a>
     </div>
     <img src="images/galeria/08.jpg" alt="Saco Bué FIT entregue à janela do carro" loading="lazy">
@@ -159,6 +159,7 @@
   <section id="menu" class="menu">
     <img src="images/galeria/02.jpg" alt="Marmitas Bué FIT com frango, batata assada e esparguete com almôndegas" loading="lazy">
     <div>
+      <img class="chef" src="images/chef_06.svg" alt="" loading="lazy">
       <h2>Menu desta semana</h2>
       <ol class="menu-list" id="menuList"></ol>
       <p class="menu-soups" id="menuSoups" hidden></p>
@@ -169,10 +170,10 @@
   <!-- ============ GALERIA ============ -->
   <section id="galeria" class="ig">
     <div class="ig-head">
-      <img src="images/logo.png" alt="">
+      <img src="images/head_duo.svg" alt="">
       <div>
         <h2>@buefit_</h2>
-        <p>O dia a dia da nossa cozinha, no Instagram.</p>
+        <p>O nosso dia a dia, no Instagram.</p>
       </div>
       <a class="btn big" href="https://www.instagram.com/buefit_/" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg> Seguir no Instagram</a>
     </div>

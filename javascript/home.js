@@ -14,17 +14,21 @@ if (WEEK.sopas.length) {
   $('#menuSoups').innerHTML = '<b>Sopas da semana:</b> ' + WEEK.sopas.map(s => esc(s[0])).join(' · ');
 }
 
-/* pacotes do menu da semana: preço por marmita e desconto face ao preço unitário */
-const packs = PRECOS.semanal;
-$('#packList').innerHTML = Object.keys(packs.M).map(Number).sort((a, b) => a - b).map(q => {
-  const un = packs.M[q] / q, off = Math.round((1 - un / packs.M[1]) * 100);
-  return `<li>
-    <span>${q} ${q > 1 ? 'marmitas' : 'marmita'}</span>
-    <b>${eur(un)}</b>
-    <small>por marmita M${packs.L[q] ? ` · L ${eur(packs.L[q] / q)}` : ''}</small>
-    ${off > 0 ? `<em>−${off}%</em>` : ''}
-  </li>`;
-}).join('');
+/* pacotes do menu da semana: uma coluna por pacote, a barra cresce com o desconto
+   face ao preço de 1 marmita */
+function renderPacks(size){
+  const t = PRECOS.semanal[size];
+  $('#packList').innerHTML = Object.keys(t).map(Number).sort((a, b) => a - b).map(q => {
+    const un = t[q] / q, off = Math.round((1 - un / t[1]) * 100);
+    return `<li style="--off:${off}">
+      <em>${off > 0 ? `−${off}%` : '&nbsp;'}</em><i></i>
+      <b>${q}</b><small>${eur(un)}</small>
+    </li>`;
+  }).join('');
+  document.querySelectorAll('#packSize button').forEach(b => b.classList.toggle('on', b.dataset.size === size));
+}
+$('#packSize').addEventListener('click', e => e.target.dataset.size && renderPacks(e.target.dataset.size));
+renderPacks('M');
 
 $('#zoneList').innerHTML = ZONES.map(z => `<li>${esc(z[0])} <b>${eur(z[1])}</b></li>`).join('');
 
