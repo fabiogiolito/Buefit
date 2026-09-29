@@ -17,7 +17,6 @@ if (WEEK.sopas.length) {
 /* pacotes do menu da semana (tamanho M): preço por marmita e quanto se poupa
    face a comprar o mesmo número de marmitas uma a uma */
 const packs = PRECOS.semanal.M;
-$('#unitPrice').textContent = eur(packs[1]);
 $('#packList').innerHTML = Object.keys(packs).map(Number).filter(q => q > 1).sort((a, b) => a - b).map(q => `<li>
   <span>${q} marmitas</span>
   <b>${eur(packs[q] / q)}</b>
