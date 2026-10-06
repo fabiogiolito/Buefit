@@ -203,7 +203,7 @@ const WEEKS = {
       'purê de batata doce, cenouras e brócolis, frango desfiado ',
       'Arroz chau chau, mix de repolho e cenoura,frango xadrez',
       'Espaguete com almôndegas',
-      'Cuscuz com salsa, cogumelos e espinafre,lombiho de porco',
+      'Cuscuz com salsa, cogumelos e espinafre,lombinho de porco',
       'Quiche de ricota e espinafre,mix de folha ',
       'Salada de Grão de bico(pimentos,cebola roxa, coentros e azeitona preta), atum e ovos cozidos ',
     ],
