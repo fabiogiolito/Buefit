@@ -224,7 +224,7 @@ const WEEKS = {
       'Bacalhau à Brás',
       'Purê de batata, salada de couve flor,hambúrguer recheado com queijo ',
       'Cuscuz colorido,beterraba,peru acebolado',
-      'Batata à murro, cogumelos e espinafre, frango desfiado',
+      'Batata à murro, cogumelos e espinafre, frango desfiado cremoso',
       'Arroz com cenoura, feijão manteiga, frango acebolado',
       'Arroz integral com lentilha, salada de pepino, quibe de forno ',
       'Arroz selvagem,tomate confeitado,omelete de cogumelo, espinafre e queijo ',
