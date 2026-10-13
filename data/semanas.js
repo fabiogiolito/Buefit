@@ -227,7 +227,7 @@ const WEEKS = {
       'Batata à murro, cogumelos e espinafre, frango desfiado cremoso',
       'Arroz com cenoura, feijão manteiga, frango acebolado',
       'Arroz integral com lentilha, salada de pepino, quibe de forno ',
-      'Arroz selvagem,tomate confeitado,omelete de cogumelo, espinafre e queijo ',
+      'Arroz selvagem,tomate confitado,omelete de cogumelo, espinafre e queijo ',
     ],
     sopas: [
       [ 'Sopa de Abóbora',       0.0 ],
