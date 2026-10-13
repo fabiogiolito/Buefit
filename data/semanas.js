@@ -231,7 +231,7 @@ const WEEKS = {
     ],
     sopas: [
       [ 'Sopa de Abóbora',       0.0 ],
-      [ 'Sopa de tomate e manjericão',  0.0 ],
+      [ 'Sopa de Tomate e Manjericão',  0.0 ],
     ],
     sumos: [],
   },
