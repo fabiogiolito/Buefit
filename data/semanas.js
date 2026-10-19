@@ -240,5 +240,24 @@ const WEEKS = {
   // ==============================================
       
  
+  '2026-42': {
+    marmitas: [
+      'Arroz com brócolis, frango desfiado com alho francês ',
+      'Panqueca à Brasileira,carne picada',
+      'Baião de 2, picadinho à brasileira',
+      'cuscuz com amêndoas,legumes salteados, peixe ao molho de coco ',
+      'Tagliatelle de espinafre com tomate cherry,carne picada',
+      'Purê de abóbora, couve refogada, pulled pork',
+      'Arroz branco, carne de porco à portuguesa ',
+      'Quinoa refogada,cogumelos e espinafre, frango em cubos',
+      'Massa à parisiense  ',
+      'Arroz com ervilha, cenouras, bifanas aceboladas ',
+    ],
+    sopas: [
+      [ 'Sopa de Legumes ',       0.0 ],
+      [ 'Sopa de Cenoura ',  0.0 ],
+    ],
+    sumos: [],
+  },
 
  };
