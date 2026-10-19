@@ -243,7 +243,7 @@ const WEEKS = {
   '2026-42': {
     marmitas: [
       'Arroz com brócolis, frango desfiado com alho francês ',
-      'Panqueca à Brasileira,carne picada',
+      'Panqueca à Brasileira com mozzarella e carne picada',
       'Baião de 2, picadinho à brasileira',
       'cuscuz com amêndoas,legumes salteados, peixe ao molho de coco ',
       'Tagliatelle de espinafre com tomate cherry,carne picada',
