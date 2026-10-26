@@ -266,9 +266,9 @@ const WEEKS = {
     marmitas: [
       'Arroz com cenoura, legumes e  frango com mostarda e mel  ',
       'Creme de cenoura, feijão verde e milho, frango desfiado ',
-      'Massa Farfalle refogado no alho com repolho, rojões ao molho  ',
+      'Massa Farfalle refogada no alho com repolho, rojões ao molho  ',
       'Escondidinho de bacalhau ',
-      'Arroz com açafrão, brócolis, almondega ao sugo ',
+      'Arroz com açafrão, brócolis, almondegas ao sugo ',
       'Cuscuz com salsa, curgetes refogadas, peixe ao molho de limão',
       'Arroz com coentros, carne estufada com abóbora  ',
       'Espaguete refogado, cenoura e brócolis, hamburguer grelhado',
