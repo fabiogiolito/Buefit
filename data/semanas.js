@@ -282,4 +282,23 @@ const WEEKS = {
     sumos: [],
   },  
 
+  '2026-44': {
+    marmitas: [
+      'Arroz com brócolis e caril de frango ao molho de coco ',
+      'Hummus de grão de bico, beterraba, carne picada',
+      'Arroz com salsa, bifinhos de peru com natas e cogumelos',
+      'Espaguete à bolonhesa ',
+      'Grão de bico salteado, grelos refogados, peixe grelhado',
+      'Penne Cremoso com brócolis e parmesão, frango em cubos',
+      'Arroz com milho e ervilha, batatas coradas, lombinho de porco',
+      'Arroz colorido, legumes salteados, linguiça toscana',
+      'Purê de batata, couve mineira, fígado acebolado ',
+      'Arroz integral com lentilha, couve flor gratinado, frango desfiado',
+    ],
+    sopas: [
+      [ 'Caldo verde ',       0.0 ],
+      [ 'Sopa de ervilha  ',  0.0 ],
+    ],
+    sumos: [],
+  },
  };
