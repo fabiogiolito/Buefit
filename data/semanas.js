@@ -307,7 +307,7 @@ const WEEKS = {
   '2026-45': {
     marmitas: [
       'Purê de batata, bócolis, frango ao molho de laranja ',
-      'Massa com molho bechamel,tomate, Bacon e espinafres frescos',
+      'Massa com molho bechamel,tomate, bacon e espinafres frescos',
       'Cuscuz com bacon, curgetes,cenouras e pimentos salteados,cubos de vitella ao molho ',
       'Arroz com açafrão, mix de repolho, carne picada',
       'Batata doce assada, nabiças refogadas no alho, filetes de peixe ao sugo ',
@@ -315,7 +315,7 @@ const WEEKS = {
       'Arroz branco,vinagrete, galinha de panela  ',
       'Tagliatelle trufada com cogumelo portobello e lascas de grana padano',
       'Arroz com coentros, feijão preto,lombinho de porco em tiras grelhadas ',
-      'Salada de quinoa ( brócolos,milho,tomate cherry, cogumelos), frango grelhado',
+      'Salada de quinoa ( brócolis,milho,tomate cherry, cogumelos), frango grelhado',
     ],
     sopas: [
       [ 'Sopa de Tomate com manjericão',       0.0 ],
