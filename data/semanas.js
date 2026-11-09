@@ -315,7 +315,7 @@ const WEEKS = {
       'Arroz branco,vinagrete, galinha de panela  ',
       'Tagliatelle trufada com cogumelo portobello e lascas de grana padano',
       'Arroz com coentros, feijão preto,lombinho de porco em tiras grelhadas ',
-      'Salada de quinoa(brócolis,milho,tomate cherry, cogumelos), frango grelhado',
+      'Salada de quinoa com  brócolis,milho,tomate cherry, cogumelos, frango grelhado',
     ],
     sopas: [
       [ 'Sopa de Tomate com manjericão',       0.0 ],
