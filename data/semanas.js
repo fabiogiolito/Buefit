@@ -330,15 +330,15 @@ const WEEKS = {
   '2026-45': {
     marmitas: [ 
       'Arroz com salsa,chilli de carne com feijão encarnado',
-      'Arroz branco,cenouras e brócolis,fricassê de frango ',
+      'Arroz branco, cenouras ,fricassê de frango ',
       'Risoto de camarão,legumes salteados ',
-      'Penne com pesto de manjericão,carne picada',
+      'Penne com pesto de manjericão , carne picada',
       'Purê de batata doce, cenouras e brócolis,frango desfiado ',
-      'Bacalhau com Natas ',
+      'Bacalhau com natas ',
       'Espaguete com almondegas',
       'Cuscuz com salsa, cogumelos e espinafres, peru acebolado,',
       'Quiche de Ricota e espinafre, mix de folhas',
-      'Salada de grão de bico (pimentos,cebola roxa,coentros e azeitona preta) tum e ovos cozidos',
+      'Salada de grão de bico (pimentos,cebola roxa,coentros e azeitona preta) atum e ovos cozidos',
     ],
     sopas: [
       [ ' Caldo de frango ',       0.0 ],
